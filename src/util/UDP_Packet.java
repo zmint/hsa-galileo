@@ -4,6 +4,31 @@
  *   if you add an attribute, which will be in a UDP packet
  *   add the name of it into the string[] ORDER
  *   
+ * PACKAGE STRUCTURE:
+ * ________________________________________________
+ * | robot | sensor | datatype | timestamp | data |
+ * ------------------------------------------------
+ * 
+ * NAME			| SIZE	| EXAMPLE	| NOTE
+ * =============+=======+===========+==========================================
+ * robot		| 3byte | "EV1"		|
+ * sensor		| 1byte | maybe as enum or just with an int
+ * datatype		| 4byte | have a look at src/util/Datatype.java
+ * timestamp	|23byte | will be created automatically, when you create the UDP_Packet
+ * data			| rest  | this is the actual data you want to transmit
+ * 
+ * Information about, why there are these parameters
+ *  robot	-	specify from which robot the data comes, will be important later,
+ *  			when more robots drive through the testing room
+ *  sensor	-	specify from which sensor the data comes.
+ *  			maybe with an enum like { USS_FRONT, USS_BACK, ... }
+ *  			this will be useful for map making!
+ *  datatype-	tells the server which kind of data he receives, so he can
+ *  			respond accordingly
+ *  data	-	this is the data which is transmitted
+ *  			currently passed as string, if you'll need another type,
+ *  			just tell us
+ *  
  */
 
 package util;
@@ -30,9 +55,6 @@ public class UDP_Packet {
 	  // space for comma separator		//  4
 	
 	// CONSTRUCTOR
-	/*
-	 * @PARAMS
-	 */
 	public UDP_Packet(String robot, int sensor, Datatype dataType, String data){
 		Date date = new Date();
 		this.timestamp = new Timestamp(date.getTime()).toString();
@@ -52,6 +74,8 @@ public class UDP_Packet {
 		if (content.length() > PACKET_SIZE)
 			throw new UDP_PacketTooBigException(
 					"We need to increase the UDP package size. Please report this to Patrick");
+			// since i'm unsure about, how big the packages have to be I made a default of
+			// 256 bytes... it can be changed in the res/net.properties file
 		return content;
 	}
 	

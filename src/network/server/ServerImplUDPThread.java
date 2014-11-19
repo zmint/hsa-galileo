@@ -30,22 +30,22 @@ public class ServerImplUDPThread extends Thread {
 		try {
 			socket = new DatagramSocket(SERVER_PORT);
 		} catch (SocketException e) {
-			throw new SocketException("Port: " + SERVER_PORT);
+			throw new SocketException(e.getMessage() + " ,Port: " + SERVER_PORT);
 		}
 	}
 
 	// Server Thread loop
 	/** Waits for UDP packets. When received they are written into a .csv file */
 	public void run() {
-		System.out.println("Server started. Running on port " + SERVER_PORT);
+		System.out.println("Server started. Running on port " + SERVER_PORT );
 		while (true) {
 			try {
 				byte[] buf = new byte[BUFFER_SIZE];
-
+				
 				// receive request
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				socket.receive(packet);
-
+				
 				// trim data
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());

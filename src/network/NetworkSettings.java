@@ -17,10 +17,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public final class NetworkSettings {
-	public static final String propertiesFile = "./res/host.properties";
-	private static int BUFFER_SIZE = 256; // default values
-	private static String SERVER_IP = "127.0.0.1"; // if reading from
-	private static int SERVER_PORT = 10000; // file wont work
+	public static final String propertiesFile = "./res/net.properties";
+	private static int BUFFER_SIZE = 256;			// default values
+	private static String SERVER_IP = "127.0.0.1";	// if reading from
+	private static int SERVER_PORT = 10000; 		// file wont work
 	private static int CLIENT_PORT = 9999;
 
 	private NetworkSettings() {
