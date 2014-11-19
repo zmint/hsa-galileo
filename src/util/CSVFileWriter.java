@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public final class CSVFileWriter {
-	private static final String FILENAME = "./res/robotdata.csv";
+	private static String filename = "./res/robotdata.csv";
 	
 	// private constructor, so you cannot create an instance of it
 	private CSVFileWriter(){
@@ -17,10 +17,10 @@ public final class CSVFileWriter {
 
 	public static void write(String packet) {
 		try {
-			FileWriter writer = new FileWriter(FILENAME, true);
+			FileWriter writer = new FileWriter(filename, true);
 			
 			 	// check if file already exists / file empty, if so create header
-			File file = new File(FILENAME);
+			File file = new File(filename);
 			if (file.length() == 0) {
 					// create header
 				String[] packetOrder = UDP_Packet.getOrder();
@@ -40,7 +40,7 @@ public final class CSVFileWriter {
 			writer.close();
 			
 		} catch (IOException e) {
-			System.err.println("Couldn't open file " + FILENAME
+			System.err.println("Couldn't open file " + filename
 					+ "\r\n  Message: " + e.getMessage());
 		}
 	}

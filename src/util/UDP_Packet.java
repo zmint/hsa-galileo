@@ -33,10 +33,9 @@
 
 package util;
 
-import util.Datatype;
-
 import java.sql.Timestamp;
 import java.util.Date;
+
 import network.NetworkSettings;
 
 

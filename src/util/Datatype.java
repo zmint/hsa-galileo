@@ -1,4 +1,4 @@
-/*Here are the different types listed.
+/*Those are Datatypes for the UDP packets, send from clients to the server
  * 
  * PURPOSE:
  * This is included in the UDP packet, so the computer knows what kind of data he receives!

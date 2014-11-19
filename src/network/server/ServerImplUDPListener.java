@@ -14,30 +14,31 @@ import java.io.IOException;
 import java.net.SocketException;
 
 
-public class ServerImplUDPThread extends Thread {
+public class ServerImplUDPListener extends Thread {
 	private static final int SERVER_PORT = NetworkSettings.getServerPort();
 	private static final int BUFFER_SIZE = NetworkSettings.getBufferSize();
 
 	protected DatagramSocket socket = null;
 
 	// CONSTRUCTOR
-	public ServerImplUDPThread() throws SocketException {
-		this("GalileoUDPServerThread");
+	public ServerImplUDPListener() throws SocketException {
+		this("UDPServer Listener");
 	}
 
-	public ServerImplUDPThread(String name) throws SocketException {
+	private ServerImplUDPListener(String name) throws SocketException {
 		super(name);
 		try {
 			socket = new DatagramSocket(SERVER_PORT);
 		} catch (SocketException e) {
-			throw new SocketException(e.getMessage() + " ,Port: " + SERVER_PORT);
+			throw new SocketException(this.getName() + "\r\n  Message: "
+						+ e.getMessage() + ", Port: " + SERVER_PORT);
 		}
 	}
 
 	// Server Thread loop
 	/** Waits for UDP packets. When received they are written into a .csv file */
 	public void run() {
-		System.out.println("Server started. Running on port " + SERVER_PORT );
+		System.out.println("###" + this.getName() + " started. Running on port " + SERVER_PORT );
 		while (true) {
 			try {
 				byte[] buf = new byte[BUFFER_SIZE];
@@ -49,6 +50,11 @@ public class ServerImplUDPThread extends Thread {
 				// trim data
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
+				
+				// TODO: implement different actions for each datatype
+				// something like: 
+				// if data.getDatatype() == info
+				//   write to info file
 
 				// write content into .csv file
 				CSVFileWriter.write(data);

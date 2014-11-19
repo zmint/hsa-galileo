@@ -7,8 +7,11 @@ package network.client;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+
 import network.NetworkSettings;
+import network.server.ServerImplUDPListener;
 import util.UDP_Packet;
+
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -21,6 +24,7 @@ public class ClientImplUDP implements Client {
 	
 	public ClientImplUDP(){
 		NetworkSettings.readConfigFile();
+		runListener();
 	}
 
 	@Override
@@ -38,7 +42,9 @@ public class ClientImplUDP implements Client {
 					address, SERVER_PORT);
 				// send packet
 			socket.send(packet);
-			System.out.println("package send");
+			
+			// debug message
+			System.out.println("package send to " + SERVER_IP + ":" + SERVER_PORT);
 
 			socket.close();
 		} catch (UnknownHostException e) {
@@ -57,6 +63,16 @@ public class ClientImplUDP implements Client {
 	@Override
 	public void send(UDP_Packet data) {
 		send(data.toString());
+	}
+	
+	private void runListener(){
+		System.out.println("Starting Listener on client...");
+		try {
+			new ClientImplUDPListener().start();
+		} catch (SocketException e) {
+			System.err.println("Couldn't start "
+					+ e.getMessage());
+		}
 	}
 
 }

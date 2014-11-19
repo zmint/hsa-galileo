@@ -17,11 +17,18 @@ public class ServerImplUDP implements Server {
 
 	@Override
 	public void run() {
+		System.out.println("Starting Server...");
 		try {
-			System.out.println("Starting Server...");
-			new ServerImplUDPThread().start();
+			new ServerImplUDPListener().start();
 		} catch (SocketException e) {
-			System.err.println("Couldn't start Server\r\n  Message: "
+			System.err.println("Couldn't start "
+					+ e.getMessage());
+		}
+		
+		try {
+			new ServerImplUDPController().start();
+		} catch (SocketException e) {
+			System.err.println("Couldn't start "
 					+ e.getMessage());
 		}
 	}
@@ -31,5 +38,5 @@ public class ServerImplUDP implements Server {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 }

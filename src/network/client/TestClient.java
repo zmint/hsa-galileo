@@ -18,7 +18,7 @@ public class TestClient {
 
 		// create a UDP packet with data
 		UDP_Packet packet = new UDP_Packet("EV0", 0, Datatype.info,
-				"Hello - this is important information");
+				"Hello - this is some test information");
 		
 		// send the packet
 		cl.send(packet);
