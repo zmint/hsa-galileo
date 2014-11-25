@@ -15,19 +15,17 @@ import java.util.Properties;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import util.Robot;
-
 public final class NetworkSettings {
 	public static final String propertiesFile = "./res/net.properties";
-	private static int BUFFER_SIZE = 256;			// default values
-	private static String SERVER_IP = "127.0.0.1";	// if reading from
-	private static int SERVER_PORT = 10000; 		// file wont work
+	private static int BUFFER_SIZE = 256;				// default values
+	private static String SERVER_IP = "141.82.167.255";	//"127.0.0.1";	// if reading from
+	private static int SERVER_PORT = 10000; 			// file wont work
 	
-	private static String EV1_IP	= "141.82.48.202"; //wrong! need to lookup the ips
+	private static String EV1_IP	= "141.82.48.201";
 	private static int EV1_PORT		= 10001;
-	private static String EV2_IP	= "141.82.48.202"; //wrong! need to lookup the ips
+	private static String EV2_IP	= "141.82.48.202";
 	private static int EV2_PORT		= 10002;
-	private static String EV3_IP	= "141.82.48.202"; //wrong! need to lookup the ips
+	private static String EV3_IP	= "141.82.48.203";
 	private static int EV3_PORT		= 10003;
 	
 	private static String EV0_IP	= "127.0.0.1";
