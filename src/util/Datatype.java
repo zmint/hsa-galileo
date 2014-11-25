@@ -13,12 +13,12 @@
 package util;
 
 public enum Datatype {
-	dist, info, warn, erro;
+	sens, info, warn, erro;
 }
 
 /*Description of the abbreviations, and explanation of their purpose
  * ****************************************************************************
- * dist		=	distance				: this is used to send distance information
+ * sens		=	sensor					: this is used to send sensor data
  * info		=	info					: inform the server about something
  * 
  *** not sure if we need the ones below 
