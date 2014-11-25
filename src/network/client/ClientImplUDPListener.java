@@ -18,6 +18,10 @@ public class ClientImplUDPListener extends Thread {
 	public ClientImplUDPListener() throws SocketException {
 		this("UDPClient Listener");
 	}
+	
+//	private ClientImplUDPListener(util.Robot robot){
+//		
+//	}
 
 	private ClientImplUDPListener(String name) throws SocketException {
 		super(name);
