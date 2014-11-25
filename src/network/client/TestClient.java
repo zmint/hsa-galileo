@@ -17,7 +17,7 @@ public class TestClient {
 		Client cl = new ClientImplUDP();
 
 		// create a UDP packet with data
-		UDP_Packet packet = new UDP_Packet("EV0", 0, Datatype.info,
+		UDP_Packet packet = new UDP_Packet("EV1", Datatype.info,
 				"Hello - this is some test information");
 		
 		// send the packet

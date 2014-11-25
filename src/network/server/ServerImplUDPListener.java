@@ -8,8 +8,11 @@ package network.server;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+
 import network.NetworkSettings;
 import util.CSVFileWriter;
+import util.Datatype;
+
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -38,7 +41,7 @@ public class ServerImplUDPListener extends Thread {
 	// Server Thread loop
 	/** Waits for UDP packets. When received they are written into a .csv file */
 	public void run() {
-		System.out.println("###" + this.getName() + " started. Running on port " + SERVER_PORT );
+		System.out.println("###" + this.getName() + " running on port " + SERVER_PORT );
 		while (true) {
 			try {
 				byte[] buf = new byte[BUFFER_SIZE];
@@ -51,9 +54,13 @@ public class ServerImplUDPListener extends Thread {
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
 				
+				System.out.println("package received: " + data);
+				
 				// TODO: implement different actions for each datatype
 				// something like: 
-				// if data.getDatatype() == info
+				//if( data.getDatatype() == Datatype.sens){
+					
+				//}
 				//   write to info file
 
 				// write content into .csv file
