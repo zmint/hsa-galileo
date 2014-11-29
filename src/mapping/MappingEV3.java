@@ -141,8 +141,8 @@ public class MappingEV3 {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.create();
 		} catch (LWJGLException ex) {
-//			Logger.getLogger(DrawingASquare.class.getName()).log(Level.SEVERE,
-//					null, ex);
+			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE,
+					null, ex);
 		}
 	}
 }
