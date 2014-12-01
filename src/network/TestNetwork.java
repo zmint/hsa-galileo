@@ -16,7 +16,7 @@ public class TestNetwork {
 		server.close();
 		
 		Client cl = new ClientImplUDP();
-		UDP_Packet packet = new UDP_Packet("EV1", 0, Datatype.info,
+		UDP_Packet packet = new UDP_Packet("EV1", Datatype.info,
 				"Hello - this is some test information");
 		
 		cl.send(packet);

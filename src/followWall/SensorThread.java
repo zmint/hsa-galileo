@@ -1,8 +1,13 @@
 package followWall;
 
+import util.Datatype;
+import util.UDP_Packet;
+import network.client.Client;
+import network.client.ClientImplUDP;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
+import lejos.utility.Delay;
 
 public class SensorThread extends Thread {
 	
@@ -19,6 +24,8 @@ public class SensorThread extends Thread {
 	
 	
 	public void run() {
+		// create a new client with the UDP Implementation
+		Client cl = new ClientImplUDP();
 		
 		while (true) {
 			sonar1.getDistanceMode().fetchSample(sonarDistance1, 0);
@@ -34,8 +41,13 @@ public class SensorThread extends Thread {
 			
 			touchActivated2 = sample2[0] > 0;
 			
-			System.out.println("Control: Distance1: " + sonarDistance1[0]+"  Distance2: " + sonarDistance2[0]+
-					" touch "+touchActivated1);
+			Delay.msDelay(333);
+			// create a UDP packet with data
+			UDP_Packet packet = new UDP_Packet("EV2", Datatype.info,
+					"Control: Distance1: " + sonarDistance1[0]+"  Distance2: " + sonarDistance2[0]);
+			
+			// send the packet
+			cl.send(packet);
 			
 			try {
 				Thread.sleep(150);
