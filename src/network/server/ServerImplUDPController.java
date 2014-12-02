@@ -57,7 +57,8 @@ public class ServerImplUDPController extends Thread {
 		} catch (InterruptedException e) {
 			System.err.println("Error while forcing thread to sleep.. in ServerImplUDPController");
 		}
-		send(EV0_IP, EV0_PORT, RobotCommand.ROUTINE_1);
+		//testing packet
+		//send(EV1_IP, EV1_PORT, RobotCommand.ROUTINE_1);
 	}
 	
 	private void send(String robotIP, int robotPORT, RobotCommand command) {
