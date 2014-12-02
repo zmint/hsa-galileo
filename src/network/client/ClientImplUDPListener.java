@@ -47,6 +47,8 @@ public class ClientImplUDPListener extends Thread {
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
 				
+				// TODO: add interpretation of commands!!
+				
 				System.out.println("EV0 received " + data + " on port " + SERVER_PORT);
 				
 			} catch (IOException e) {

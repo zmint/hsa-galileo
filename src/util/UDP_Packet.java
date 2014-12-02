@@ -5,14 +5,13 @@
  *   add the name of it into the string[] ORDER
  *   
  * PACKAGE STRUCTURE:
- * ________________________________________________
- * | robot | sensor | datatype | timestamp | data |
- * ------------------------------------------------
+ * _______________________________________
+ * | robot | datatype | timestamp | data |
+ * ---------------------------------------
  * 
  * NAME			| SIZE	| EXAMPLE	| NOTE
  * =============+=======+===========+==========================================
  * robot		| 3byte | "EV1"		|
- * sensor		| 1byte | maybe as enum or just with an int
  * datatype		| 4byte | have a look at src/util/Datatype.java
  * timestamp	|23byte | will be created automatically, when you create the UDP_Packet
  * data			| rest  | this is the actual data you want to transmit
@@ -20,11 +19,9 @@
  * Information about, why there are these parameters
  *  robot	-	specify from which robot the data comes, will be important later,
  *  			when more robots drive through the testing room
- *  sensor	-	specify from which sensor the data comes.
- *  			maybe with an enum like { USS_FRONT, USS_BACK, ... }
- *  			this will be useful for map making!
  *  datatype-	tells the server which kind of data he receives, so he can
  *  			respond accordingly
+ *	timestamp-	the time, from when the data is
  *  data	-	this is the data which is transmitted
  *  			currently passed as string, if you'll need another type,
  *  			just tell us
