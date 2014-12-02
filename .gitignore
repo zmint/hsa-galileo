@@ -1,4 +1,4 @@
-res/robotdata.cs
-bin/
-.classpath
-.project
+/res/robotdata.cs
+/bin/
+/.classpath
+/.project
