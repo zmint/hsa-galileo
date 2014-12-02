@@ -53,6 +53,8 @@ class DriveForward implements Behavior {
 		robot.setTravelSpeed(10); // cm/sec
 		robot.setRotateSpeed(90); // deg/sec
 		robot.forward();
+		//leftMotor.getTachoControl();
+		
 		
 		while (!suppressed) {
 			Thread.yield();

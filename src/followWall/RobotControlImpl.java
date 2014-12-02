@@ -1,13 +1,12 @@
 package followWall;
 
-public class MyMain {
+public class RobotControlImpl implements RobotControl {
 
 	public static final long MAX_PROGRAM_TIME = 80000;
 	
-	public static void main(String[] args) {
+	public void start (){
 		RobotController controller = new RobotController();
 
 		controller.start();
 	}
-
 }
