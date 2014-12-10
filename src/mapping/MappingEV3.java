@@ -2,7 +2,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -10,10 +9,13 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class MappingEV3 {
 
+	MappingEV3Input test = new MappingEV3Input();
 	private final static int SIZEX = 20;
 	private final static int SIZEY = 20;
+	private static boolean hi = false;
 
 	public static void main(String[] args) {
+		MappingEV3Input.init();
 
 		initDisplay();
 		initGL();
@@ -28,36 +30,45 @@ public class MappingEV3 {
 			glColor3f(0.80f, 0.20f, 0.2f);
 
 			// drawRect(400, 400, 224, 32, 22);
-			drawRect(0, 0, SIZEX, SIZEY, false);
-			drawRect(20, 40, SIZEX, SIZEY, true);
+//			drawRect(0, 0, SIZEX, SIZEY, 40, true);
+//			drawRect(20, 40, SIZEX, SIZEY, true);
+			
+//			System.out.println(MappingEV3Input.a[0][0]);
+			
+			drawRect(MappingEV3Input.a[0][0], MappingEV3Input.a[0][1], SIZEX, SIZEY, hi);
+			if ( hi == false)
+				hi = true;
+			else
+				hi = false;
 			Display.update();
 		}
 	}
 
-
-	private static void drawRect(float x, float y, float width, float height, boolean banana) {
+	private static void drawRect(float x, float y, float width, float height,
+			boolean banana) {
 		drawRect(x, y, width, height, 0, banana);
 	}
 
 	private static void drawRect(float x, float y, float width, float height,
 			float rot, boolean banana) {
-		if (banana){
-		glPushMatrix();
-		{
-			glTranslatef(x, y, 0);
-			glRotatef(rot, 0, 0, 1);
-
-			glBegin(GL_QUADS);
+		if (banana) {
+			glPushMatrix();
 			{
-				glVertex2f(0, 0);
-				glVertex2f(0, height);
-				glVertex2f(width, height);
-				glVertex2f(width, 0);
+				glTranslatef(x, y, 0);
+				glRotatef(rot, 0, 0, 1);
+
+				glBegin(GL_QUADS);
+				{
+					glVertex2f(0, 0);
+					glVertex2f(0, height);
+					glVertex2f(width, height);
+					glVertex2f(width, 0);
+				}
+				glEnd();
 			}
-			glEnd();
+			glPopMatrix();
 		}
-		glPopMatrix();
-	}}
+	}
 
 	private static void initGL() {
 		glMatrixMode(GL_PROJECTION);
@@ -80,7 +91,8 @@ public class MappingEV3 {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.create();
 		} catch (LWJGLException ex) {
-			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE,
+					null, ex);
 		}
 	}
 }
