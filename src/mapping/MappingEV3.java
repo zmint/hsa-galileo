@@ -13,8 +13,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class MappingEV3 {
 
 	MappingEV3Input test = new MappingEV3Input();
-	private final static int SIZEX = 10;
-	private final static int SIZEY = 10;
+	private final static int SIZE = 80;
 	private static boolean hi = true;
 
 	static MapTestingClass a = new MapTestingClass();
@@ -43,19 +42,27 @@ public class MappingEV3 {
 			// if (MapObject == WALL){
 			//
 			// }
-			for (int y = 0; y < a.map.size(); y++) {
+			int var1 = 0;
+			int var2 = -1;
+
+			for (int y = a.map.size() - 1; y >= 0; --y) {
+				var2++;
 				for (int x = 0; x < a.map.get(y).size(); x++) {
 					// System.out.println(a.map.get(0).size());
 					// System.out.println(a.map.get(i).get(j));
 
 					if (a.map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
-						drawRect(y * 15, x * 15, SIZEX, SIZEY, hi);
+						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
+								SIZE, hi);
 					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0.80f, 0.20f, 0.98f);
-						drawRect(y * 15, x * 15, SIZEX, SIZEY, hi);
+						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
+								SIZE, hi);
 					}
+					var1++;
 				}
+				var1 = 0;
 			}
 			// int i = 0;
 			// int j = 0;
