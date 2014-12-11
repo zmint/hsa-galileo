@@ -10,7 +10,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import network.NetworkSettings;
-import util.CSVFileWriter;
+import util.CSVFile;
 import util.Datatype;
 
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class ServerImplUDPListener extends Thread {
 				//   write to info file
 
 				// write content into .csv file
-				CSVFileWriter.write(data);
+				CSVFile.write(data);
 
 				// if we need to send data back
 				// InetAddress address = packet.getAddress();

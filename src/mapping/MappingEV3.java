@@ -1,5 +1,6 @@
 package mapping;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,9 +13,11 @@ import static org.lwjgl.opengl.GL11.*;
 public class MappingEV3 {
 
 	MappingEV3Input test = new MappingEV3Input();
-	private final static int SIZEX = 20;
-	private final static int SIZEY = 20;
-	private static boolean hi = false;
+	private final static int SIZEX = 10;
+	private final static int SIZEY = 10;
+	private static boolean hi = true;
+
+	static MapTestingClass a = new MapTestingClass();
 
 	public static void main(String[] args) {
 		MappingEV3Input.init();
@@ -29,19 +32,63 @@ public class MappingEV3 {
 		while (!Display.isCloseRequested()) {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glLoadIdentity();
-			glColor3f(0.80f, 0.20f, 0.2f);
+			// glColor3f(0.80f, 0.20f, 0.2f);
 
 			// drawRect(400, 400, 224, 32, 22);
-//			drawRect(0, 0, SIZEX, SIZEY, 40, true);
-//			drawRect(20, 40, SIZEX, SIZEY, true);
-			
-//			System.out.println(MappingEV3Input.a[0][0]);
-			
-			drawRect(MappingEV3Input.a[0][0], MappingEV3Input.a[0][1], SIZEX, SIZEY, hi);
-			if ( hi == false)
-				hi = true;
-			else
-				hi = false;
+			// drawRect(0, 0, SIZEX, SIZEY, true);
+			// drawRect(20, 40, SIZEX, SIZEY, true);
+
+			// System.out.println(a.map.toString());
+			// a.map.toString();
+			// if (MapObject == WALL){
+			//
+			// }
+			for (int y = 0; y < a.map.size(); y++) {
+				for (int x = 0; x < a.map.get(y).size(); x++) {
+					// System.out.println(a.map.get(0).size());
+					// System.out.println(a.map.get(i).get(j));
+
+					if (a.map.get(y).get(x) == MapObject.WALL) {
+						glColor3f(0.80f, 0.20f, 0.2f);
+						drawRect(y * 15, x * 15, SIZEX, SIZEY, hi);
+					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
+						glColor3f(0.80f, 0.20f, 0.98f);
+						drawRect(y * 15, x * 15, SIZEX, SIZEY, hi);
+					}
+				}
+			}
+			// int i = 0;
+			// int j = 0;
+			//
+			// int k = 40;
+			// int l = 20;
+			// for (ArrayList<MapObject> line : a.map) {
+			// System.out.println("Wert: " + line);
+			// for (MapObject o : line) {
+			// if (o == MapObject.WALL) {
+			// drawRect(i, j, SIZEX, SIZEY, hi);
+			// i += 20;
+			// j += 20;
+			// } else if (o == MapObject.OBSTACLE) {
+			// drawRect(k, l, SIZEX, SIZEY, hi);
+			// k += 20;
+			// l += 20;
+			// }
+			// }
+			// }
+			// drawRect(MappingEV3Input.a[0][0], MappingEV3Input.a[0][1], SIZEX,
+			// SIZEY, hi);
+
+			// for (int i = 0; i < 4; i++) {
+			// for (int j = 0; j < 4; j++) {
+			// drawRect(a.map[i][], a.map[][j], SIZEX, SIZEY, hi);
+			// }
+			//
+			// }
+			// if (hi == false)
+			// hi = true;
+			// else
+			// hi = false;
 			Display.update();
 		}
 	}
@@ -90,7 +137,7 @@ public class MappingEV3 {
 	private static void initDisplay() {
 
 		try {
-			Display.setDisplayMode(new DisplayMode(800, 600));
+			Display.setDisplayMode(new DisplayMode(800, 800));
 			Display.create();
 		} catch (LWJGLException ex) {
 			Logger.getLogger(MappingEV3.class.getName()).log(Level.SEVERE,

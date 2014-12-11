@@ -1,27 +1,2 @@
 robot,sensor,dataType,timestamp,data
-EV0,0,info,2014-11-19 01:39:21.575,Hello - this is some information packet
-EV0,0,info,2014-11-19 02:09:50.341,Hello - this is some information packet
-EV0,0,info,2014-11-19 02:57:56.775,Hello - this is important information
-EV0,0,info,2014-11-19 18:31:59.74,Hello - this is important information
-EV0,0,info,2014-11-19 18:32:18.927,Hello - this is important information
-EV0,0,info,2014-11-19 18:58:52.925,Hello - this is important information
-EV0,0,info,2014-11-19 19:02:04.414,Hello - this is some test information
-EV0,0,info,2014-11-19 19:02:11.6,Hello - this is some test information
-EV0,0,info,2014-11-19 19:06:34.37,Hello - this is some test information
-EV0,0,info,2014-11-19 19:10:18.947,Hello - this is some test information
-EV0,0,info,2014-11-19 19:12:44.782,Hello - this is some test information
-EV0,0,info,2014-11-19 19:13:31.692,Hello - this is some test information
-EV0,0,info,2014-11-19 19:14:30.835,Hello - this is some test information
-EV0,0,info,2014-11-19 19:17:27.068,Hello - this is some test information
-EV0,0,info,2014-11-19 19:17:36.431,Hello - this is some test information
-EV0,0,info,2014-11-19 19:18:53.253,Hello - this is some test information
-EV0,0,info,2014-11-19 19:19:53.849,Hello - this is some test information
-EV0,0,info,2014-11-19 19:20:53.913,Hello - this is some test information
-EV0,0,info,2014-11-19 19:21:10.329,Hello - this is some test information
-EV0,0,info,2014-11-25 09:10:35.51,Hello - this is some test information
-EV1,0,info,2014-11-25 09:14:55.868,Hello - this is some test information
-EV1,0,info,2014-11-25 09:15:03.622,Hello - this is some test information
-EV1,info,2000-01-01 01:54:17.839,Hello - this is some test information
-EV1,info,2000-01-01 01:57:08.84,Hello - this is some test information
-EV1,info,2014-11-25 11:13:00.425,Hello - this is some test information
-EV1,info,2000-01-01 02:15:00.369,Hello - this is some test information
+EV0,0,info,2014-11-19 01:39:21.575,10,10
