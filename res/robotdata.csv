@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 robot,sensor,dataType,timestamp,data
 EV0,0,info,2014-11-19 01:39:21.575,10,10
+=======
+robot,dataType,timestamp,motorCount,movement,data
+EV0,sens,2014-12-10 13:26:42.128,0.0,false,uss_front: 5 uss_back: 5
+EV2,sens,2014-12-10 13:26:48.128,0.0,false,uss_front: 5 uss_back: 5
+EV2,sens,2014-12-10 13:26:49.203,0.0,false,uss_front: 10 uss_back: 10
+>>>>>>> e361ec91d534b9348e65c1cf481781147618b549
