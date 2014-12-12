@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class MappingEV3 {
 
 	MappingEV3Input test = new MappingEV3Input();
-	private final static int SIZE = 80;
+	private final static int SIZE = 20;
 	private static boolean hi = true;
 
 	static MapTestingClass a = new MapTestingClass();
@@ -33,22 +33,14 @@ public class MappingEV3 {
 			glLoadIdentity();
 			// glColor3f(0.80f, 0.20f, 0.2f);
 
-			// drawRect(400, 400, 224, 32, 22);
-			// drawRect(0, 0, SIZEX, SIZEY, true);
-			// drawRect(20, 40, SIZEX, SIZEY, true);
+			// drawRect(20, 40, SIZEX, SIZEY, 23, true);
 
-			// System.out.println(a.map.toString());
-			// a.map.toString();
-			// if (MapObject == WALL){
-			//
-			// }
 			int var1 = 0;
 			int var2 = -1;
 
 			for (int y = a.map.size() - 1; y >= 0; --y) {
 				var2++;
 				for (int x = 0; x < a.map.get(y).size(); x++) {
-					// System.out.println(a.map.get(0).size());
 					// System.out.println(a.map.get(i).get(j));
 
 					if (a.map.get(y).get(x) == MapObject.WALL) {
@@ -64,34 +56,7 @@ public class MappingEV3 {
 				}
 				var1 = 0;
 			}
-			// int i = 0;
-			// int j = 0;
-			//
-			// int k = 40;
-			// int l = 20;
-			// for (ArrayList<MapObject> line : a.map) {
-			// System.out.println("Wert: " + line);
-			// for (MapObject o : line) {
-			// if (o == MapObject.WALL) {
-			// drawRect(i, j, SIZEX, SIZEY, hi);
-			// i += 20;
-			// j += 20;
-			// } else if (o == MapObject.OBSTACLE) {
-			// drawRect(k, l, SIZEX, SIZEY, hi);
-			// k += 20;
-			// l += 20;
-			// }
-			// }
-			// }
-			// drawRect(MappingEV3Input.a[0][0], MappingEV3Input.a[0][1], SIZEX,
-			// SIZEY, hi);
 
-			// for (int i = 0; i < 4; i++) {
-			// for (int j = 0; j < 4; j++) {
-			// drawRect(a.map[i][], a.map[][j], SIZEX, SIZEY, hi);
-			// }
-			//
-			// }
 			// if (hi == false)
 			// hi = true;
 			// else

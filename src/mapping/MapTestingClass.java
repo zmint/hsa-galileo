@@ -27,7 +27,7 @@ public class MapTestingClass {
 		map.buildMapFromOneDimensionalArray(mapObjects, 4);
 		map2.buildMapFromOneDimensionalArrayList(mapObjectsList, 4);
 
-//		 System.out.println(map.toString());
+		 System.out.println(map.toString());
 		// System.out.println(map2.toString());
 
 	}

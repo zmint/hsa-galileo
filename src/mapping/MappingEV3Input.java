@@ -16,11 +16,11 @@ public class MappingEV3Input {
 		a[2][1] = 01;
 		a[2][2] = 22;
 		//
-		for (int i = 0; i < a.length; i++) {
-			for (int j = 0; j < a[i].length; j++) {
-				System.out.println(a[j][i]);
-			}
+//		for (int i = 0; i < a.length; i++) {
+//			for (int j = 0; j < a[i].length; j++) {
+//				System.out.println(a[j][i]);
+//			}
 		}
 
 	}
-}
+//}
