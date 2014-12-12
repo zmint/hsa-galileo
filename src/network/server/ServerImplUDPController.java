@@ -95,10 +95,5 @@ public class ServerImplUDPController extends Thread {
 						+ e.getMessage());
 		}
 	}
-	
-	private void close(){
-		socket.close();
-		System.out.println(this.getName() + " shutted down! ");
-	}
 
 }

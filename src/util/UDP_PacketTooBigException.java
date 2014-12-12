@@ -5,7 +5,7 @@
 package util;
 
 public class UDP_PacketTooBigException extends Exception {
-	
+
 	public UDP_PacketTooBigException(String message){
 		super(message);
 	}
