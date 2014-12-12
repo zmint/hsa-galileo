@@ -8,8 +8,14 @@ import java.util.ArrayList;
 //it should store all the elements which build alltogether the map which the robot
 //is exploring
 public class Map extends ArrayList<ArrayList<MapObject>>{
+	private int x=0;
+	private int y=0;
+	private int width=0;
+	private int height=0;
+	private MapObject empty = MapObject.EMPTY;
+	private MapObject wall = MapObject.WALL;
 	
-	private ArrayList<ArrayList<MapObject>> arrayList = new ArrayList<ArrayList<MapObject>>();
+//	private ArrayList<ArrayList<MapObject>> arrayList = new ArrayList<ArrayList<MapObject>>();
 	
 	//this function initializes empty inner Arrays(rows) of the map
 	//depending on the given numberOfRows value
@@ -61,6 +67,65 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 		    	cumulatedRows+=mapWidth;
 		    }
 		}
+	}
+	
+	public void updateMapFromVectors(TestVector vector){
+		if(this.height==0){
+			this.add(new ArrayList<MapObject>());
+			this.height+=1;
+		}
+		//set height
+		if(vector.y!=0 && this.height<vector.y+this.y){
+			//the difference between the y movement and the height so we know
+			//how much additional rows(height-y) we need
+		int mapExpansion = vector.y -this.height; 
+		for(int i=0;i<mapExpansion;i++){
+			this.add(new ArrayList<MapObject>());
+			
+			for(int k=0;k<this.width;k++){
+				this.get(this.size()-1).add(empty);
+			}
+			
+			this.height+=1;
+		
+		}
+		}
+		//set maxwidth
+		if(vector.x!=0 && this.width<vector.x+this.x){
+		//new maxwidth of the map
+		this.width=vector.x+this.x;
+		//set every row to the maxwidth
+		for(int i=0;i<this.height;i++){
+			int updatedWidth = this.width-this.get(i).size();
+			for(int j=0;j<updatedWidth;j++){
+				this.get(i).add(empty);
+			}
+		}
+		}
+		
+		System.out.println("y "+this.y);
+		System.out.println("x "+this.x);
+		System.out.println("width "+this.width);
+		System.out.println("height "+this.height);
+		System.out.println("vectorx "+vector.x);
+		System.out.println("vectory "+vector.y);
+		
+		if(vector.y!=0){
+			for(int i=0;i<vector.y;i++){
+				System.out.println("heightaktiv: "+this.size());
+				this.get(this.y+i).set(this.x,wall);
+			}
+			this.y+=vector.y-1;
+		}
+
+		if(vector.x!=0){
+			for(int i=0;i<vector.x;i++){
+				this.get(this.y).set(this.x+i, wall);
+				
+			}
+			this.x+=vector.x-1;;
+		}
+		
 	}
 	
 	
