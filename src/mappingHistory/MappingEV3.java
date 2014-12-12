@@ -12,14 +12,12 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class MappingEV3 {
 
-	MappingEV3Input test = new MappingEV3Input();
 	private final static int SIZE = 20;
 	private static boolean hi = true;
 
 	static MapTestingClass a = new MapTestingClass();
 
 	public static void main(String[] args) {
-		MappingEV3Input.init();
 
 		initDisplay();
 		initGL();
