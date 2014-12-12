@@ -18,7 +18,7 @@ import java.io.IOException;
 public final class NetworkSettings {
 	public static final String propertiesFile = "./res/net.properties";
 	private static int BUFFER_SIZE	= 256;			// default values
-	private static String SERVER_IP = "141.82.172.103";	// if reading from
+	private static String SERVER_IP = "141.82.162.2";	// if reading from
 	private static int SERVER_PORT	= 10000; 		// file wont work
 	
 	private static String EV1_IP	= "141.82.48.201";
