@@ -1,4 +1,4 @@
-package mapping;
+package mappingHistory;
 
 public class MappingEV3Input {
 	public static int[][] a = null;

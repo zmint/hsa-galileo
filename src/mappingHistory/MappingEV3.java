@@ -1,4 +1,4 @@
-package mapping;
+package mappingHistory;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
