@@ -6,7 +6,7 @@
  *   
  * PACKAGE STRUCTURE:
  * _______________________________________________________________
- * | robot | datatype | timestamp | motorCount | movement | data |
+ * | robot | datatype | timestamp | motorCount | data |
  * ---------------------------------------------------------------
  * 
  * NAME			| SIZE	| EXAMPLE	| NOTE
@@ -15,7 +15,6 @@
  * datatype		| 4byte | have a look at src/util/Datatype.java
  * timestamp	|23byte | will be created automatically, when you create the UDP_Packet
  * motorCount	| 4byte | 
- * movement		| 1byte | 
  * data			| rest  | this is the actual data you want to transmit
  * 
  * Information about, why there are these parameters
@@ -25,7 +24,6 @@
  *  			respond accordingly
  *	timestamp-	the time, from when the data is
  *  motorCount-	how fast the robot moves
- *  movement-	indication for movement, or no movement
  *  data	-	this is the data which is transmitted
  *  			currently passed as string, if you'll need another type,
  *  			just tell us
@@ -44,26 +42,23 @@ public class UDP_Packet {
 	private static final int PACKET_SIZE = NetworkSettings.getBufferSize();
 	// has the order of one packet
 	private static final String[] ORDER = new String[] { "robot", "dataType",
-			"timestamp", "motorCount", "movement", "data" };
+			"timestamp", "motorCount", "data" };
 	// content // Individual size, listed below
 	private String robot		= "";	//   3
 	private String dataType		= "";	//   4
 	private String timestamp	= "";	//  23
 	private float motorCount	= 0;	//   4
-	private boolean movement	= false;//   1
 	private String data			= "";	// 217 // need to check how much place we need
 	// space for comma separator 	 	//   5
 
 	// CONSTRUCTOR
-	public UDP_Packet(String robot, Datatype dataType, float motorCount,
-			boolean movement, String data) {
+	public UDP_Packet(String robot, Datatype dataType, float motorCount, String data) {
 		Date date = new Date();
 		this.timestamp = new Timestamp(date.getTime()).toString();
 
 		this.robot = robot;
 		this.dataType = dataType.toString();
 		this.motorCount = motorCount;
-		this.movement = movement;
 		this.data = data;
 	}
 
@@ -75,7 +70,7 @@ public class UDP_Packet {
 	 */
 	public String getContent() throws UDP_PacketTooBigException {
 		String content = robot + "," + dataType + "," + timestamp + ","
-				+ motorCount + "," + movement + "," + data;
+				+ motorCount + "," + data;
 		if (content.length() > PACKET_SIZE)
 			throw new UDP_PacketTooBigException(
 					"We need to increase the UDP package size. Please report this to Patrick");
@@ -93,7 +88,7 @@ public class UDP_Packet {
 	 */
 	public String toString() {
 		String content = robot + "," + dataType + "," + timestamp + ","
-				+ motorCount + "," + movement + "," + data;
+				+ motorCount + "," + data;
 		if (content.length() > PACKET_SIZE)
 			System.err.println("We need to increase the UDP package size");
 		return content;

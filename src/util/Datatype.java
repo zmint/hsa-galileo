@@ -13,12 +13,16 @@
 package util;
 
 public enum Datatype {
-	sens, orie, info, warn, erro;
+	sens, most, mofi, orie, info, warn, erro;
 }
 
 /*Description of the abbreviations, and explanation of their purpose
  * ****************************************************************************
  * sens		=	sensor					: this is used to send sensor data
+ * most		=	movement started		: 
+ * mofi		=	movement finished		: 
+ * 
+ * 
  * orie		=	orientation				: this is used when telling the server about changing orientation,
  * 										  e.g. when you rotate
  * info		=	info					: inform the server about something
