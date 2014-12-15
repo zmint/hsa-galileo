@@ -4,7 +4,6 @@
 
 package main;
 
-import util.CSVFile;
 import network.server.Server;
 import network.server.ServerImplUDP;
 import mapping.Map;
@@ -27,11 +26,8 @@ public class Main_Computer {
 		
 		mapVisualization.start();
 		
-		
-		//CSVFile.print();
-		
 		// run the Server
-		//server.run();
+		server.run();
 	}
 	
 	public static Map getMap() {

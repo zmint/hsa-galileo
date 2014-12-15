@@ -2,6 +2,8 @@
  * 
  */
 
+package main;
+
 import followWall.RobotController;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
