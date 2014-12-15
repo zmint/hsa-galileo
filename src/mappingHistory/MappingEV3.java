@@ -1,6 +1,7 @@
 package mappingHistory;
 
 import java.util.logging.Level;
+
 import java.util.logging.Logger;
 
 import mapping.MapObject;
@@ -16,7 +17,7 @@ public class MappingEV3 {
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 
-	static MapTestingClass a = new MapTestingClass();
+	static mapping.MapTestingClass a = new mapping.MapTestingClass();
 
 	public static void main(String[] args) {
 
@@ -36,15 +37,17 @@ public class MappingEV3 {
 			int var1 = 0;
 			int var2 = -1;
 
-			for (int y = a.map.size() - 1; y >= 0; --y) {
+			 System.out.println(a.map3.toString());
+			for (int y = a.map3.size() - 1; y >= 0; --y) {
 				var2++;
-				for (int x = 0; x < a.map.get(y).size(); x++) {
+				for (int x = 0; x < a.map3.get(y).size(); x++) {
+					System.out.println(a.map3.toString());
 
-					if (a.map.get(y).get(x) == MapObject.WALL) {
+					if (a.map3.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
-					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
+					} else if (a.map3.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0.80f, 0.20f, 0.98f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
