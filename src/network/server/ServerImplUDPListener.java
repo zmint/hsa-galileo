@@ -8,8 +8,12 @@ package network.server;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+
 import network.NetworkSettings;
 import util.CSVFile;
+import util.Datatype;
+import util.UDP_Packet;
+
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -36,7 +40,8 @@ public class ServerImplUDPListener extends Thread {
 	}
 
 	// Server Thread loop
-	/** Waits for UDP packets. When received they are written into a .csv file */
+	/** Waits for UDP packets. When received they are written into a .csv file
+	 * 										and forwarded to the converter */
 	public void run() {
 		System.out.println("###" + this.getName() + " running on port " + SERVER_PORT );
 		while (true) {
@@ -51,14 +56,12 @@ public class ServerImplUDPListener extends Thread {
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
 				
+				// debug msg
 				System.out.println("package received: " + data);
 				
-				// TODO: implement different actions for each datatype
-				// something like: 
-				//if( data.getDatatype() == Datatype.sens){
-					
-				//}
-				//   write to info file
+				// if dataType == mofi
+				if (data.substring(4, 8) == Datatype.mofi.toString())
+					pathfinding.setWaitingForACK(false);
 
 				// write content into .csv file
 				CSVFile.write(data);

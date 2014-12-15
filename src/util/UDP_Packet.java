@@ -50,6 +50,12 @@ public class UDP_Packet {
 	private float motorCount	= 0;	//   4
 	private String data			= "";	// 217 // need to check how much place we need
 	// space for comma separator 	 	//   5
+	
+	public static void main(String[] args){
+		UDP_Packet pack = new UDP_Packet("EV2",Datatype.mofi, 42, "uss_sb: 2, uss_sf: 2, uss_f 5");
+		String data = pack.toString();
+		System.out.println(data.substring(4, 8));
+	}
 
 	// CONSTRUCTOR
 	public UDP_Packet(String robot, Datatype dataType, float motorCount, String data) {
@@ -77,6 +83,19 @@ public class UDP_Packet {
 		// since i'm unsure about, how big the packages have to be I made a
 		// default of
 		// 256 bytes... it can be changed in the res/net.properties file
+		return content;
+	}
+	
+	// unsure if needed
+	public String[] getContentAsArray() throws UDP_PacketTooBigException {
+		String[] content = new String[5];
+		
+		content[0] = robot;
+		content[1] = dataType;
+		content[2] = timestamp;
+		content[3] = motorCount+""; //convert to String
+		content[4] = data;
+		
 		return content;
 	}
 

@@ -10,12 +10,6 @@ package network.server;
 
 public interface Server {
 	public void run();					// starts the server
-	public void close();				// terminates the server
-	public void send(int command);
-	
-	/** If such things are needed we can implement the functionality */
-//	abstract Map getMap();					// gets Map from mapper
-//	abstract void sendMap(Map map);			// sends Map if client asks for it
-//	abstract void sendLoc(Location robot);		// sends Location of robot
-//	public void isObstacle();				// sends robot, if found object is obstacle or not
+	public void close();				// terminates the server, currently unimplemented
+	public void send(int command);		// send an command to EV2
 }
