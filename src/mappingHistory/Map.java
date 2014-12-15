@@ -2,6 +2,8 @@ package mappingHistory;
 
 import java.util.ArrayList;
 
+import mapping.MapObject;
+
 //Ziad N�rpel:
 //Map class which inherits from ArrayList
 //this class is basically a two dimensional ArrayList, a ArrayList containing

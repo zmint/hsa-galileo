@@ -3,6 +3,8 @@ package mappingHistory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import mapping.MapObject;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
