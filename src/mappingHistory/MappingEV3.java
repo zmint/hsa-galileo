@@ -1,10 +1,11 @@
 package mappingHistory;
 
 import java.util.logging.Level;
-
 import java.util.logging.Logger;
 
+import mapping.Map;
 import mapping.MapObject;
+import main.Main_Computer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -17,7 +18,7 @@ public class MappingEV3 extends Thread {
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 
-	static mapping.MapTestingClass a = new mapping.MapTestingClass();
+	static Map a = Main_Computer.getMap();// ;new mapping.MapTestingClass();
 
 	public void run() {
 		initDisplay();
@@ -45,16 +46,16 @@ public class MappingEV3 extends Thread {
 			int var1 = 0;
 			int var2 = -1;
 
-			System.out.println(a.map3.toString());
-			for (int y = a.map3.size() - 1; y >= 0; --y) {
+			System.out.println(a.toString());
+			for (int y = a.size() - 1; y >= 0; --y) {
 				var2++;
-				for (int x = 0; x < a.map3.get(y).size(); x++) {
+				for (int x = 0; x < a.get(y).size(); x++) {
 
-					if (a.map3.get(y).get(x) == MapObject.WALL) {
+					if (a.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
-					} else if (a.map3.get(y).get(x) == MapObject.OBSTACLE) {
+					} else if (a.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0.80f, 0.20f, 0.98f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
 								SIZE, drawingIt);
