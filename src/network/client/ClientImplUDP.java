@@ -20,6 +20,8 @@ public class ClientImplUDP implements Client {
 	private static final String SERVER_IP	= NetworkSettings.getServerIp();
 	private static final int	SERVER_PORT	= NetworkSettings.getServerPort();
 	private static final int	BUFFER_SIZE = NetworkSettings.getBufferSize();
+	private static int readBufIndex = 0;
+	public static String[] packetBuffer = new String[256];
 	
 	public ClientImplUDP(){
 		NetworkSettings.readConfigFile();
@@ -61,6 +63,18 @@ public class ClientImplUDP implements Client {
 	@Override
 	public void send(UDP_Packet data) {
 		send(data.toString());
+	}
+	
+	@Override
+	public String receive() {
+		String packet = packetBuffer[readBufIndex];
+		
+		if (readBufIndex == (packetBuffer.length -1))
+			readBufIndex = 0;
+		else
+			readBufIndex++;
+		
+		return packet;
 	}
 	
 	private void runListener(){

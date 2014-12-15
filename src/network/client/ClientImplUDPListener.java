@@ -8,9 +8,10 @@ import java.net.SocketException;
 import network.NetworkSettings;
 
 public class ClientImplUDPListener extends Thread {
-	// currently just works with the debug robot ev0...
-	private static final int SERVER_PORT = NetworkSettings.getEv0Port();
+	// ??unsure??currently just works with the debug robot ev0...
+	private static final int SERVER_PORT = NetworkSettings.getEv2Port();
 	private static final int BUFFER_SIZE = NetworkSettings.getBufferSize();
+	private int writeBufIndex = 0;
 
 	protected DatagramSocket socket = null;
 
@@ -18,10 +19,6 @@ public class ClientImplUDPListener extends Thread {
 	public ClientImplUDPListener() throws SocketException {
 		this("UDPClient Listener");
 	}
-	
-//	private ClientImplUDPListener(util.Robot robot){
-//		
-//	}
 
 	private ClientImplUDPListener(String name) throws SocketException {
 		super(name);
@@ -47,9 +44,14 @@ public class ClientImplUDPListener extends Thread {
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
 				
-				// TODO: add interpretation of commands!!
+				// save packets into Buffer
+				ClientImplUDP.packetBuffer[writeBufIndex] = data;
 				
-				System.out.println("EV0 received " + data + " on port " + SERVER_PORT);
+				if ( writeBufIndex == (ClientImplUDP.packetBuffer.length -1))
+					writeBufIndex = 0;
+				else
+					writeBufIndex++;
+					
 				
 			} catch (IOException e) {
 				System.err
