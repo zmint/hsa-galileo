@@ -1,5 +1,6 @@
 package ClientControl;
 
+import Move.Movement;
 import Move.Movements;
 import network.client.Client;
 import network.client.ClientImplUDP;
@@ -7,18 +8,28 @@ import util.Datatype;
 import util.UDP_Packet;
 
 public class ControlClient {
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
+	public void run(Client cl) {
 		//String info;
-		String imput = null;
-		Client cl = new ClientImplUDP();
-		Movements movements = new Movements();
+		String imput = "5";
+//		Client cl = new ClientImplUDP();
+		Movement movements = new Movement();
 		// create a UDP packet with data
 		int i =5;
 		while ( i != 0){
 			      //0 to stop the client the value should be 
 			      //0 to stop the current process, while it's running 
-			imput = cl.receive();      
-			i= Integer.parseInt(imput);
+			if (cl.hasNextPacket()){
+				String received = cl.receive();
+				if (received == null)
+					; // pass
+				else
+					imput = received;
+				System.out.println(received);
+			}
+			System.out.println(imput);
+			      
+			i = Integer.parseInt(imput);
 			      // to drive forward the value of the entry should be between 101 and 200 
 			      // 101: drive 1 cm forward;.......;200: drive 100 cm forward
 	           if ( (101<=i)&&(i<=200) ) {

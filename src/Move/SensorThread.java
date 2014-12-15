@@ -1,3 +1,5 @@
+
+
 package Move;
 
 import lejos.hardware.port.SensorPort;
@@ -12,36 +14,40 @@ public class SensorThread extends Thread {
 	
 	/*private EV3TouchSensor touch1 = new EV3TouchSensor(SensorPort.S4);
 	private boolean touchActivated1 = false;*/
-	private EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S1);
+	//private EV3TouchSensor touch = new EV3TouchSensor(SensorPort.S1);
 	public SensorMode sensorSampleProvider;
-	private boolean touchActivated = false;
+	//private boolean touchActivated = false;
 	
-	EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S4);
+	//EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S4);
 	
 	EV3UltrasonicSensor sonar1 = new EV3UltrasonicSensor(SensorPort.S3);
 	float[] sonarDistance1 = new float[1];
 	EV3UltrasonicSensor sonar2 = new EV3UltrasonicSensor(SensorPort.S2);
 	float[] sonarDistance2 = new float[1];
+	EV3UltrasonicSensor sonar3 = new EV3UltrasonicSensor(SensorPort.S4);
+	float[] sonarDistance3 = new float[1];
+	
 	int distance = 0;
 	
 	
 	public void run() {
 		// create a new client with the UDP Implementation
 		int control = 0;
-		sensorSampleProvider = touch.getTouchMode();
+		//sensorSampleProvider = touch.getTouchMode();
 		
 		while (true) {
 			
 			float[] sample = new float[sensorSampleProvider.sampleSize()];
 			sensorSampleProvider.fetchSample(sample, 0);
-			touchActivated = sample[0] > 0;
+			//touchActivated = sample[0] > 0;
 			
 			sonar1.getDistanceMode().fetchSample(sonarDistance1, 0);
 			sonar2.getDistanceMode().fetchSample(sonarDistance2, 0);
+			sonar3.getDistanceMode().fetchSample(sonarDistance3, 0);
 			
-			sample = new float[irSensor.sampleSize()];
-			control = irSensor.getRemoteCommand(0);
-			irSensor.fetchSample(sample, 0);
+//			sample = new float[irSensor.sampleSize()];
+//			control = irSensor.getRemoteCommand(0);
+//			irSensor.fetchSample(sample, 0);
 			distance = (int)sample[0];
 			
 			
@@ -62,9 +68,13 @@ public class SensorThread extends Thread {
 		return sonarDistance2[0];
 	}
 	
-	public boolean isTouched() {
-		return touchActivated;
+	public float getSonarDistance3() {
+		return sonarDistance2[0];
 	}
+	
+//	public boolean isTouched() {
+//		return touchActivated;
+//	}
 	/*
 	public boolean isTouched2() {
 		return touchActivated2;

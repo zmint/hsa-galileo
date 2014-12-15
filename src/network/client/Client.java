@@ -14,9 +14,12 @@ import util.UDP_Packet;
 
 public interface Client {
 	void send(UDP_Packet data);
+	void sendACK();
+	
+	boolean hasNextPacket();
 	String receive();
 	void startSending();
-	void stopSending();
+//	void stopSending();
 	
 	boolean isSensorSenderRunning();
 }

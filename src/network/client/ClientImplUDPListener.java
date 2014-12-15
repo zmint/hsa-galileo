@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
+import ClientControl.ClientThread;
 import network.NetworkSettings;
 
 public class ClientImplUDPListener extends Thread {
@@ -44,7 +45,12 @@ public class ClientImplUDPListener extends Thread {
 				String data = new String(packet.getData());
 				data = data.substring(0, packet.getLength());
 				
+				ClientImplUDP.hasNext = true;
 				// save packets into Buffer
+//				ClientControl.ControlClient cc = new ClientControl.ControlClient();
+//				cc.run(cl);
+				//System.out.println("package received " + data);
+				
 				ClientImplUDP.packetBuffer[writeBufIndex] = data;
 				
 				if ( writeBufIndex == (ClientImplUDP.packetBuffer.length -1))
@@ -52,7 +58,7 @@ public class ClientImplUDPListener extends Thread {
 				else
 					writeBufIndex++;
 					
-				
+				//socket.close();
 			} catch (IOException e) {
 				System.err
 						.println("IOException while listening for UDP packets on port "

@@ -9,6 +9,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 import network.NetworkSettings;
+import util.Datatype;
 import util.UDP_Packet;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class ClientImplUDP implements Client {
 	private static final String SERVER_IP	= NetworkSettings.getServerIp();
 	private static final int	SERVER_PORT	= NetworkSettings.getServerPort();
 	private static final int	BUFFER_SIZE = NetworkSettings.getBufferSize();
+	public static boolean hasNext = false;
 	private static int readBufIndex = 0;
 	public static String[] packetBuffer = new String[256];
 	private boolean sensorSenderRunning = false;
@@ -46,7 +48,7 @@ public class ClientImplUDP implements Client {
 			socket.send(packet);
 			
 			// debug message
-			System.out.println("package send to " + SERVER_IP + ":" + SERVER_PORT);
+			//System.out.println("package send to " + SERVER_IP + ":" + SERVER_PORT);
 
 			socket.close();
 		} catch (UnknownHostException e) {
@@ -65,6 +67,16 @@ public class ClientImplUDP implements Client {
 	@Override
 	public void send(UDP_Packet data) {
 		send(data.toString());
+	}
+	
+	@Override
+	public void sendACK() {
+		send(new UDP_Packet("EV2", Datatype.mofi, 0, ""));
+	}
+	
+	@Override
+	public boolean hasNextPacket() {
+		return hasNext;
 	}
 	
 	@Override
@@ -89,12 +101,16 @@ public class ClientImplUDP implements Client {
 		sensorSenderRunning = true;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void stopSending() {
-		System.out.println("Stop sending sensor data");
-		
-		sensorSender.stop();
-		sensorSenderRunning = false;
+//	@SuppressWarnings("deprecation")
+//	public void stopSending() {
+//		System.out.println("Stop sending sensor data");
+//		
+//		sensorSender.stop();
+//		sensorSenderRunning = false;
+//	}
+	
+	public boolean isSensorSenderRunning(){
+		return sensorSenderRunning;
 	}
 	
 	private void runListener(){
@@ -106,9 +122,4 @@ public class ClientImplUDP implements Client {
 					+ e.getMessage());
 		}
 	}
-	
-	public boolean isSensorSenderRunning(){
-		return sensorSenderRunning;
-	}
-
 }

@@ -12,7 +12,7 @@ public class TestServer {
 		// create a new Server with the UDP Implementation
 		Server server = new ServerImplUDP();
 		// run the Server
-		server.run();
+		server.send(104);
 		
 		// now the server listens on the port specified in
 		// the config file './src/network/host.properties'

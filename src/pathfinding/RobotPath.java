@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import util.CSVFile;
+import main.Main_Computer;
 import mapping.Map;
 import network.client.RobotCommand;
 import network.server.Server;
@@ -46,8 +47,8 @@ public class RobotPath { // This class implements the general behaviour
 		return waitingForACK;
 	}
 
-	public void setWaitingForACK(boolean waitingForACK) {
-		this.waitingForACK = waitingForACK;
+	public void setWaitingForACK(boolean waitingForACKs) {
+		this.waitingForACK = waitingForACKs;
 	}
 
 	public RobotPath() { // Constructor
@@ -58,7 +59,7 @@ public class RobotPath { // This class implements the general behaviour
 	public void run(Server s, Map m) {
 
 		this.myServer = s;
-		this.waitingForACK = false;
+		waitingForACK = false;
 
 		
 		driveTillContact(); // now i should be at an obstacle
@@ -113,6 +114,7 @@ public class RobotPath { // This class implements the general behaviour
 		double angleThatIHaveTurned = 0.0d;
 		
 		myServer.send(515); // turn 15 degrees at first
+		this.waitingForACK = true;
 			while (this.waitingForACK == true) {
 				;// waiting for ACK
 			}
@@ -120,6 +122,7 @@ public class RobotPath { // This class implements the general behaviour
 			
 		while (true) {
 			myServer.send(502); // turn 2 degrees again and again till i am parallel
+			this.waitingForACK = true;
 				while(this.waitingForACK==true){
 					;// waiting for ACK
 				}
@@ -135,11 +138,18 @@ public class RobotPath { // This class implements the general behaviour
 	public void driveTillContact() { // this function lets the robot drive 1 cm
 										// forward until it's less than 3 cm
 										// from the wall
+		
 		while (true) {
 			myServer.send(101); // drive 1 cm forward
-			while (this.waitingForACK == true) {
+			//this.waitingForACK = true;
+			Main_Computer.waitForAck = true;
+			System.out.println("Waiting for ACK...");
+			//while (this.waitingForACK == true) {
+			while (Main_Computer.waitForAck == true) {
+				System.out.println(Main_Computer.waitForAck + " waiting...");
 				;// waiting for ACK
 			}
+			System.out.println("Received ACK!");
 			if (this.currentSensorData().get(2) < 0.03) { // am i near to an
 															// obstacle?
 				break;
@@ -151,6 +161,7 @@ public class RobotPath { // This class implements the general behaviour
 		double drivenDistance = 0.0d;
 		while(true) {
 			myServer.send(101);
+			this.waitingForACK = true;
 			while(this.waitingForACK == true) {
 				; // waiting for ACK
 			}
@@ -175,19 +186,21 @@ public class RobotPath { // This class implements the general behaviour
 	public ArrayList<Float> currentSensorData() {
 
 		// gets the sensor data out of the history file
+		
+		
 
 		int historySize = getHistory().size();
-		System.out.println("History size: " + historySize);
-		String[] packageData = getHistory().get(historySize - 5);
+		//System.out.println("History size: " + historySize);
+		String[] packageData = getHistory().get(historySize - 1);
 		int packageDataSize = packageData.length;
 		String sensorData = packageData[packageDataSize - 1];
 
 		// now we have to parse and cast from string to float
-		System.out.println(packageData[packageDataSize - 1]);
+		//System.out.println(packageData[packageDataSize - 1]);
 		String[] data = sensorData.split(" ");
 		ArrayList<Float> convertedData = new ArrayList<Float>();
 		for (int i = 1; i < data.length; i += 2) {
-			System.out.println(data[i]);
+			//System.out.println(data[i]);
 			convertedData.add(Float.parseFloat(data[i])); // works not
 		}
 

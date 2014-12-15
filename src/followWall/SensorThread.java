@@ -43,11 +43,11 @@ public class SensorThread extends Thread {
 			
 			Delay.msDelay(333);
 			// create a UDP packet with data
-			UDP_Packet packet = new UDP_Packet("EV2", Datatype.info,
-					"Control: Distance1: " + sonarDistance1[0]+"  Distance2: " + sonarDistance2[0]);
+//			UDP_Packet packet = new UDP_Packet("EV2", Datatype.info,
+//					"Control: Distance1: " + sonarDistance1[0]+"  Distance2: " + sonarDistance2[0]);
 			
 			// send the packet
-			cl.send(packet);
+			//cl.send(packet);
 			
 			try {
 				Thread.sleep(150);

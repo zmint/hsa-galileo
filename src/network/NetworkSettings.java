@@ -18,12 +18,12 @@ import java.io.IOException;
 public final class NetworkSettings {
 	public static final String propertiesFile = "./res/net.properties";
 	private static int BUFFER_SIZE	= 256;			// default values
-	private static String SERVER_IP = "141.82.162.2";	// if reading from
+	private static String SERVER_IP = "172.20.10.2";	// if reading from
 	private static int SERVER_PORT	= 10000; 		// file wont work
 	
 	private static String EV1_IP	= "141.82.48.201";
 	private static int EV1_PORT		= 10001;
-	private static String EV2_IP	= "141.82.48.202";
+	private static String EV2_IP	= "172.20.10.4";//"141.82.48.202";
 	private static int EV2_PORT		= 10002;
 	private static String EV3_IP	= "141.82.48.203";
 	private static int EV3_PORT		= 10003;

@@ -9,10 +9,12 @@ package network.server;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import main.Main_Computer;
 import network.NetworkSettings;
 import util.CSVFile;
 import util.Datatype;
 import util.UDP_Packet;
+import pathfinding.*;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -60,11 +62,16 @@ public class ServerImplUDPListener extends Thread {
 				System.out.println("package received: " + data);
 				
 				// if dataType == mofi
-				if (data.substring(4, 8) == Datatype.mofi.toString())
-					pathfinding.setWaitingForACK(false);
+				if (data.substring(4, 8).equals(Datatype.mofi.toString())) {
+					Main_Computer.waitForAck = false;
+					//Main_Computer.getRobotPath().setWaitingForACK(false);
+					//System.out.println("ACK received in server");
+				} else {
+					// write content into .csv file
+					CSVFile.write(data);
+				}
 
-				// write content into .csv file
-				CSVFile.write(data);
+
 
 				// if we need to send data back
 				// InetAddress address = packet.getAddress();

@@ -8,30 +8,39 @@ import network.server.Server;
 import network.server.ServerImplUDP;
 import mapping.Map;
 import mappingHistory.*;
+import pathfinding.*;
 
 
 public class Main_Computer {
+	// SETTINGS
 	private static boolean fromHistory = true;
+	public static boolean waitForAck = false;
+	
+	// INSTANCES
 	private static MappingEV3 mapVisualization = null;
-	private static Map map = null;
+	private static Server server = new ServerImplUDP();
+	private static Map map = new Map();
+	private static RobotPath pathfinding = new RobotPath();
+	
 	
 	public static void main(String[] args) {
-		Server server = new ServerImplUDP();
-		
-		map = new Map();
+		server.run();
 		
 		if (fromHistory){
-			mapVisualization = new MappingEV3();
+			mapVisualization = new mappingHistory.MappingEV3();
 		}
 		
 		mapVisualization.start();
 		
-		// run the Server
-		server.run();
+		pathfinding.run(server, map);
 	}
 	
 	public static Map getMap() {
 		return map;
+	}
+	
+	public static RobotPath getRobotPath() {
+		return pathfinding;
 	}
 
 }
