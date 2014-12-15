@@ -3,10 +3,12 @@ package mapping;
 import java.util.ArrayList;
 
 public class MapTestingClass {
-	public static void main(String[] args) {
+	public static Map map3 = new Map();
+
+	public MapTestingClass(){
 		Map map = new Map();
 		Map map2 = new Map();
-		Map map3 = new Map();
+//		Map map3 = new Map();
 		TestVector vector1 = new TestVector();
 		vector1.x = 5;
 		vector1.y = 0;
@@ -40,11 +42,11 @@ public class MapTestingClass {
 		map.buildMapFromOneDimensionalArray(mapObjects, 4);
 		map2.buildMapFromOneDimensionalArrayList(mapObjectsList, 4);
 
-		// System.out.println(map.toString());
+//		 System.out.println(map.toString());
 		// System.out.println(map2.toString());
-		for (ArrayList<MapObject> mappi : map3) {
-			System.out.println(mappi.toString());
-		}
+//		for (ArrayList<MapObject> mappi : map3) {
+//			System.out.println(mappi.toString());
+//		}
 
 	}
 }
