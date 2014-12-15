@@ -24,7 +24,6 @@ public class MappingEV3 extends Thread {
 		initGL();
 		gameLoop();
 		cleanUp();
-
 	}
 
 	// old main -> now as thread
