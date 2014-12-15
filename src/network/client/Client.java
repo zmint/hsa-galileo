@@ -13,7 +13,8 @@ package network.client;
 import util.UDP_Packet;
 
 public interface Client {
-	void send(UDP_Packet data);		// It's recommended to use this Method
+	void send(UDP_Packet data);
+	String receive();
 	
 	/** If such things are needed we can implement the functionality */
 //	String receive();
