@@ -3,7 +3,6 @@ package mappingHistory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import mapping.Map;
 import mapping.MapObject;
 
 import org.lwjgl.LWJGLException;
@@ -15,7 +14,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class MappingEV3 {
 
 	private final static int SIZE = 20;
-	private static boolean hi = true;
+	private static boolean drawingIt = true;
 
 	static MapTestingClass a = new MapTestingClass();
 
@@ -32,7 +31,6 @@ public class MappingEV3 {
 			glClear(GL_COLOR_BUFFER_BIT);
 			glLoadIdentity();
 			// glColor3f(0.80f, 0.20f, 0.2f);
-
 			// drawRect(20, 40, SIZEX, SIZEY, 23, true);
 
 			int var1 = 0;
@@ -41,26 +39,25 @@ public class MappingEV3 {
 			for (int y = a.map.size() - 1; y >= 0; --y) {
 				var2++;
 				for (int x = 0; x < a.map.get(y).size(); x++) {
-					// System.out.println(a.map.get(i).get(j));
 
 					if (a.map.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
-								SIZE, hi);
+								SIZE, drawingIt);
 					} else if (a.map.get(y).get(x) == MapObject.OBSTACLE) {
 						glColor3f(0.80f, 0.20f, 0.98f);
 						drawRect(var1 * (SIZE + 5), var2 * (SIZE + 5), SIZE,
-								SIZE, hi);
+								SIZE, drawingIt);
 					}
 					var1++;
 				}
 				var1 = 0;
 			}
 
-			// if (hi == false)
-			// hi = true;
+			// if (drawingIt == false)
+			// drawingIt = true;
 			// else
-			// hi = false;
+			// drawingIt = false;
 			Display.update();
 		}
 	}
