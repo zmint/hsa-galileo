@@ -11,6 +11,7 @@ package network.server;
 public interface Server {
 	public void run();					// starts the server
 	public void close();				// terminates the server
+	public void send(int command);
 	
 	/** If such things are needed we can implement the functionality */
 //	abstract Map getMap();					// gets Map from mapper
