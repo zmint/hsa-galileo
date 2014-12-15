@@ -1,32 +1,16 @@
-/*This is the part of the main program, which runs on a robot
- * 
- */
+package network.client;
 
-import followWall.RobotController;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
-import lejos.hardware.Key;
 import lejos.hardware.port.Port;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
-import network.client.Client;
-import network.client.ClientImplUDP;
 import util.Datatype;
 import util.UDP_Packet;
 
-public class Main_Robot {
-
-	public static void main(String[] args) {
-		sendSensorData();
-		// moveRobot();
-	}
-
-	private static void moveRobot() {
-		RobotController controller = new RobotController();
-		controller.start();
-	}
+public class SensorSendingThread extends Thread {
 	
-	private static void sendSensorData() {
+	public void run() {
 		Client cl = new ClientImplUDP();
 
 		// init robot
@@ -48,20 +32,25 @@ public class Main_Robot {
 		float uss_sback_sample[] = new float[1];
 		float uss_front_sample[] = new float[1];
 
-		Key escape = brick.getKey("Escape");
-
-		while (!escape.isDown()) {
+		while (cl.isSensorSenderRunning()) {
 			sample_uss_sback.fetchSample(uss_sfront_sample, 0);
 			sample_uss_sfront.fetchSample(uss_sback_sample, 0);
 			sample_uss_front.fetchSample(uss_front_sample, 0);
-
+			
 			UDP_Packet packet = new UDP_Packet("EV2", Datatype.sens, 0, 
-					"uss_sback: " + uss_sback_sample[0] + " uss_fback: "
-							+ uss_sfront_sample[0] + " uss_front: " + uss_front_sample[0]);
-
+					"uss_sb: " + uss_sback_sample[0] + " uss_sf: "
+							+ uss_sfront_sample[0] + " uss_f: " + uss_front_sample[0]);
+			
 			// send the packet
 			cl.send(packet);
+			
+			// set thread to sleep, so we send about 3 packets per second
+			try {
+				Thread.sleep(333);
+			} catch (InterruptedException e) {
+				System.err.println("Couldn't set SensorSendingThread to sleep. Message: " + e.getMessage());
+			}
 		}
-
 	}
+
 }

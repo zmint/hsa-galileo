@@ -22,6 +22,8 @@ public class ClientImplUDP implements Client {
 	private static final int	BUFFER_SIZE = NetworkSettings.getBufferSize();
 	private static int readBufIndex = 0;
 	public static String[] packetBuffer = new String[256];
+	private boolean sensorSenderRunning = false;
+	private Thread sensorSender = null;
 	
 	public ClientImplUDP(){
 		NetworkSettings.readConfigFile();
@@ -77,6 +79,24 @@ public class ClientImplUDP implements Client {
 		return packet;
 	}
 	
+	public void startSending() {
+		System.out.println("Start sending sensor data");
+		
+		if (sensorSender == null)
+			sensorSender = new SensorSendingThread();
+		
+		sensorSender.start();
+		sensorSenderRunning = true;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void stopSending() {
+		System.out.println("Stop sending sensor data");
+		
+		sensorSender.stop();
+		sensorSenderRunning = false;
+	}
+	
 	private void runListener(){
 		System.out.println("Starting Listener on client...");
 		try {
@@ -85,6 +105,10 @@ public class ClientImplUDP implements Client {
 			System.err.println("Couldn't start "
 					+ e.getMessage());
 		}
+	}
+	
+	public boolean isSensorSenderRunning(){
+		return sensorSenderRunning;
 	}
 
 }

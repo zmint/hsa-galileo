@@ -15,13 +15,8 @@ import util.UDP_Packet;
 public interface Client {
 	void send(UDP_Packet data);
 	String receive();
+	void startSending();
+	void stopSending();
 	
-	/** If such things are needed we can implement the functionality */
-//	String receive();
-//	void Control();
-//		// unsure if we need those
-//	Map getMap();				// get current state of map
-//	boolean borderComplete();	// asks server if everything is done?
-//								// or just tells the server, yeah i'm done!
-//	Location getLoc(String robot);	// gives you the location of yourself or another robot
+	boolean isSensorSenderRunning();
 }
