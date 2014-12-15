@@ -12,20 +12,28 @@ import org.lwjgl.opengl.DisplayMode;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class MappingEV3 {
+public class MappingEV3 extends Thread {
 
 	private final static int SIZE = 20;
 	private static boolean drawingIt = true;
 
 	static mapping.MapTestingClass a = new mapping.MapTestingClass();
 
-	public static void main(String[] args) {
-
+	public void run() {
 		initDisplay();
 		initGL();
 		gameLoop();
 		cleanUp();
 	}
+
+	// old main -> now as thread
+
+	// public static void main(String[] args) {
+	// initDisplay();
+	// initGL();
+	// gameLoop();
+	// cleanUp();
+	// }
 
 	private static void gameLoop() {
 		while (!Display.isCloseRequested()) {
@@ -37,11 +45,10 @@ public class MappingEV3 {
 			int var1 = 0;
 			int var2 = -1;
 
-			 System.out.println(a.map3.toString());
+			System.out.println(a.map3.toString());
 			for (int y = a.map3.size() - 1; y >= 0; --y) {
 				var2++;
 				for (int x = 0; x < a.map3.get(y).size(); x++) {
-					System.out.println(a.map3.toString());
 
 					if (a.map3.get(y).get(x) == MapObject.WALL) {
 						glColor3f(0.80f, 0.20f, 0.2f);
