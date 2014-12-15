@@ -95,7 +95,7 @@ public class UDP_Packet {
 		content[2] = timestamp;
 		content[3] = motorCount+""; //convert to String
 		content[4] = data;
-		
+
 		return content;
 	}
 
