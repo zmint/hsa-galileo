@@ -26,8 +26,7 @@ public class ClientImplUDP implements Client {
 		runListener();
 	}
 
-	@Override
-	public void send(String data) {
+	private void send(String data) {
 		try {
 				// get a datagram socket
 			DatagramSocket socket = new DatagramSocket();
