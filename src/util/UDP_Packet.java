@@ -48,14 +48,9 @@ public class UDP_Packet {
 	private String dataType		= "";	//   4
 	private String timestamp	= "";	//  23
 	private float motorCount	= 0;	//   4
-	private String data			= "";	// 217 // need to check how much place we need
-	// space for comma separator 	 	//   5
+	private String data			= "";	// 222 // need to check how much place we need
+	// space for comma separator 	 	//   4
 	
-	public static void main(String[] args){
-		UDP_Packet pack = new UDP_Packet("EV2",Datatype.mofi, 42, "uss_sb: 2, uss_sf: 2, uss_f 5");
-		String data = pack.toString();
-		System.out.println(data.substring(4, 8));
-	}
 
 	// CONSTRUCTOR
 	public UDP_Packet(String robot, Datatype dataType, float motorCount, String data) {
