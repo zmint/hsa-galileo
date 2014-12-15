@@ -75,10 +75,10 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 			this.height+=1;
 		}
 		//set height
-		if(vector.y!=0 && this.height<vector.y+this.y){
+		if(vector.y!=0 && this.height-1<vector.y+this.y){
 			//the difference between the y movement and the height so we know
 			//how much additional rows(height-y) we need
-		int mapExpansion = vector.y -this.height; 
+		int mapExpansion = (vector.y+this.y) -this.height; 
 		for(int i=0;i<mapExpansion;i++){
 			this.add(new ArrayList<MapObject>());
 			
@@ -90,6 +90,52 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 		
 		}
 		}
+		
+		//negative y
+		if(vector.y <0 && (vector.y+this.y)<0){
+			int mapShift=vector.y+this.y;
+			for(int i=mapShift+1;i<0;i++){
+				this.add(0,new ArrayList<MapObject>());
+				this.height+=1;
+				for(int j=0;j<this.width;j++){
+					if(this.x==j){
+						this.get(0).add(wall);
+					}else{
+					this.get(0).add(empty);
+				}
+				}
+			}
+			this.y=0;
+			
+		}
+		
+		//negative x
+		if(vector.x <0){
+			if(vector.x+this.x<0){
+				int mapShift=vector.x+this.x;
+				for(int i=mapShift;i<0;i++){
+			
+					for(int j=0;j<this.height;j++){
+						if(j==this.y){
+							this.get(j).add(0,wall);
+						}else{
+							this.get(j).add(0,empty);
+						}
+				
+					}
+				}
+				this.x=0;
+			}else{
+				System.out.println("JETZT ANFANG: "+vector.x);
+				for(int i=vector.x;i<0;i++){
+					System.out.println("JETZT: "+(this.x+i));
+					this.get(this.y).set(this.x+i, wall);
+				}
+				this.x+=vector.x;
+			}
+			
+		}
+		
 		//set maxwidth
 		if(vector.x!=0 && this.width<vector.x+this.x){
 		//new maxwidth of the map
@@ -110,7 +156,7 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 		System.out.println("vectorx "+vector.x);
 		System.out.println("vectory "+vector.y);
 		
-		if(vector.y!=0){
+		if(vector.y>0){
 			for(int i=0;i<vector.y;i++){
 				System.out.println("heightaktiv: "+this.size());
 				this.get(this.y+i).set(this.x,wall);
@@ -118,7 +164,7 @@ public class Map extends ArrayList<ArrayList<MapObject>>{
 			this.y+=vector.y-1;
 		}
 
-		if(vector.x!=0){
+		if(vector.x>0){
 			for(int i=0;i<vector.x;i++){
 				this.get(this.y).set(this.x+i, wall);
 				
