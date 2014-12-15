@@ -40,6 +40,8 @@ public class ServerImplUDPController extends Thread {
 	public void run() {
 		System.out.println("###" + this.getName() + " started.");
 		
+		//send(EV2_IP, EV2_PORT, 1);
+		
 			// I THINK HERE'S A GOOD PLACE TO CONNECT 
 			// THE GUI COMMANDS WITH METHODS HERE
 			
@@ -59,6 +61,46 @@ public class ServerImplUDPController extends Thread {
 		}
 		//testing packet
 		//send(EV1_IP, EV1_PORT, RobotCommand.ROUTINE_1);
+	}
+	
+	public void send(int command) {
+		send(EV2_IP, EV2_PORT, command);
+	}
+	
+	private void send(String robotIP, int robotPORT, int command) {
+		try {
+				// get a datagram socket
+			DatagramSocket socket = new DatagramSocket();
+
+				// fill package
+			byte[] buf = new byte[BUFFER_SIZE];
+			
+			buf = (command + "").getBytes();
+			
+				// get address and create packet
+			InetAddress address = InetAddress.getByName(robotIP);
+			DatagramPacket packet = new DatagramPacket(buf, buf.length,
+					address, robotPORT);
+				// send packet
+			socket.send(packet);
+			
+			// debug message
+			System.out.println("package send to " + robotIP + ":" + robotPORT);
+
+			socket.close();
+		} catch (UnknownHostException e) {
+			System.err.println("Unknown host " + robotIP
+					+ "\r\n  Message: " + e.getMessage());
+			System.err.println("Maybe you need to configure the netconfigs"
+					+ " in the file res/net.properties ?");
+		} catch (SocketException e) {
+			System.err.println("Couldn't create Socket\r\n  Message: "
+					+ e.getMessage());
+		} catch (IOException e) {
+			System.err
+				.println("Problem sending package, resend?\r\n  Message: "
+						+ e.getMessage());
+		}
 	}
 	
 	private void send(String robotIP, int robotPORT, RobotCommand command) {
